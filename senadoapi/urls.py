@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from parlamentares import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^api/parlamentares', views.ParlamentarViewSet.as_view({'get': 'list'})),
+    url(r'^api/parlamentares/(?P<pk>\d+)', views.ParlamentarViewSet.as_view({'get': 'retrieve'})),
 ]
