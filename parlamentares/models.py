@@ -13,8 +13,8 @@ class Parlamentar(models.Model):
     forma_tratamento = models.CharField(max_length=15)
     foto_url = models.CharField(max_length=100)
     pagina_url = models.CharField(max_length=100)
-    email = models.CharField(max_length=70)
-    sigla_partido = models.CharField(max_length=4)
+    email = models.CharField(max_length=70, blank=True)
+    sigla_partido = models.CharField(max_length=10)
     uf = models.CharField(max_length=2)
     mandato = models.OneToOneField("Mandato")
 
