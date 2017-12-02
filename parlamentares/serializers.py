@@ -70,7 +70,7 @@ class MandatoSerializer(serializers.ModelSerializer):
         return instance
 
 class ParlamentarSerializer(serializers.ModelSerializer):
-    mandato = MandatoSerializer
+    mandatos = MandatoSerializer(many=True, read_only=True)
     
     class Meta:
         model = models.Parlamentar

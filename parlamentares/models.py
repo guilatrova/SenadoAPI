@@ -16,11 +16,11 @@ class Parlamentar(models.Model):
     email = models.CharField(max_length=70, blank=True)
     sigla_partido = models.CharField(max_length=10)
     uf = models.CharField(max_length=2)
-    mandato = models.OneToOneField("Mandato")
 
 class Mandato(models.Model):
     id = models.BigIntegerField(primary_key=True)
     participacao = models.CharField(max_length=50)
+    parlamentar = models.ForeignKey("Parlamentar", related_name="mandatos")
 
 class Legislatura(models.Model):
     numero = models.PositiveIntegerField()

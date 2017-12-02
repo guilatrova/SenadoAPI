@@ -20,20 +20,21 @@ class SyncSenadoresEmAtividadeService:
     def _sync(self, data):
         for parlamentar_root in data:
             try:
-                data = self._map_mandato(parlamentar_root['Mandato'])
-                mandato = self._get_or_create(
-                    data, 
-                    models.Mandato,
-                    MandatoSerializer
-                )
-
                 data = self._map_parlamentar(parlamentar_root['IdentificacaoParlamentar'])
                 parlamentar = self._get_or_create(
                     data,
                     models.Parlamentar,
-                    ParlamentarSerializer,
-                    mandato=mandato
+                    ParlamentarSerializer                    
                 )
+
+                data = self._map_mandato(parlamentar_root['Mandato'])
+                mandato = self._get_or_create(
+                    data, 
+                    models.Mandato,
+                    MandatoSerializer,
+                    parlamentar=parlamentar
+                )
+
                 print('ok')
             except Exception as excp:
                 print(excp)
