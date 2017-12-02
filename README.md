@@ -41,4 +41,4 @@ python sync_api.py
 python manage.py runserver
 ```
 
-Agora você pode acessar http://localhost:8000/api/mandatos/ e deve ver uma lista com todos os mandatos :)s
+Agora você pode acessar http://localhost:8000/api/mandatos/ e deve ver uma lista com todos os mandatos :)
