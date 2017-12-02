@@ -35,7 +35,7 @@ class Suplente(models.Model):
 
 class Exercicio(models.Model):
     id = models.BigIntegerField(primary_key=True)
-    inicio = models.DateField(),
-    leitura = models.DateField(null=True)
+    inicio = models.DateField()
+    leitura = models.DateField(blank=True, null=True)
     causa_afastamento = models.CharField(max_length=100, blank=True)
     mandato = models.ForeignKey("Mandato", related_name="exercicios")

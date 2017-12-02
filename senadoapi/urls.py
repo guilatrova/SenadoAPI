@@ -18,6 +18,8 @@ from django.contrib import admin
 from parlamentares import views
 
 urlpatterns = [
-    url(r'^api/parlamentares', views.ParlamentarViewSet.as_view({'get': 'list'})),
-    url(r'^api/parlamentares/(?P<pk>\d+)', views.ParlamentarViewSet.as_view({'get': 'retrieve'})),
+    url(r'^api/parlamentares/$', views.ParlamentarViewSet.as_view({'get': 'list'})),
+    url(r'^api/parlamentares/(?P<pk>\d+)/$', views.ParlamentarViewSet.as_view({'get': 'retrieve'})),
+    url(r'^api/mandatos/$', views.MandatoViewSet.as_view({'get': 'list'})),
+    url(r'^api/mandatos/(?P<pk>\d+)/$', views.MandatoViewSet.as_view({'get': 'retrieve'})),
 ]

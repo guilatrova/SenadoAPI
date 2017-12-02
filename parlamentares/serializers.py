@@ -1,12 +1,6 @@
 from rest_framework import serializers
 from . import models
 
-class ParlamentarSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Parlamentar
-        fields = '__all__'
-        depth = 2
-
 class LegislaturaSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Legislatura
@@ -22,7 +16,7 @@ class ExercicioSerializer(serializers.ModelSerializer):
         model = models.Exercicio
         fields = ('id', 'inicio', 'leitura', 'causa_afastamento')
         extra_kwargs = {
-            'id': {'validators': []},
+            'id': {'validators': []}
         }
 
 class MandatoSerializer(serializers.ModelSerializer):
@@ -56,7 +50,6 @@ class MandatoSerializer(serializers.ModelSerializer):
         self._create_inner_object(models.Legislatura, mandato, legislaturas)
         self._create_inner_object(models.Suplente, mandato, suplentes)
         self._create_exercicio(mandato, exercicios)
-        # self._create_inner_object(models.Exercicio, mandato, exercicios)
 
         return mandato
 
@@ -67,14 +60,19 @@ class MandatoSerializer(serializers.ModelSerializer):
 
         instance.legislaturas.all().delete()
         instance.suplentes.all().delete()
-        # instance.exercicios.all().delete()
 
         self._create_inner_object(models.Legislatura, instance, legislaturas)
         self._create_inner_object(models.Suplente, instance, suplentes)
-        # self._create_inner_object(models.Exercicio, instance, exercicios)
         self._create_exercicio(instance, exercicios)
 
-        # instance.update(**validated_data)
         models.Mandato.objects.filter(pk=validated_data['id']).update(**validated_data)
 
         return instance
+
+class ParlamentarSerializer(serializers.ModelSerializer):
+    mandato = MandatoSerializer
+    
+    class Meta:
+        model = models.Parlamentar
+        fields = '__all__'
+        depth = 3
